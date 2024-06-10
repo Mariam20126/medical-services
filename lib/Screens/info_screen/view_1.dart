@@ -20,7 +20,7 @@ class view1 extends StatelessWidget {
               image: DecorationImage(
                   alignment: Alignment.bottomCenter,
                   image: AssetImage(
-                    "images/doctor3.png",
+                    "images/assets/doctor3.png",
                   ),
                   filterQuality: FilterQuality.high)),
         ),
