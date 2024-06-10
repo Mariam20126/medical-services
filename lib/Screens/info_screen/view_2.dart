@@ -20,7 +20,7 @@ class view2 extends StatelessWidget {
               image: DecorationImage(
                   alignment: Alignment.bottomCenter,
                   image: AssetImage(
-                    "images/doctor3.png",
+                    "images/assets/doctor3.png",
                   ),
                   filterQuality: FilterQuality.high)),
         ),
@@ -46,7 +46,7 @@ class view2 extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(25),
                   child: Text(
-                    "Get connect our Online\nConsultation",
+                    "find your best\nConsultor",
                     style: GoogleFonts.inter(
                         fontSize: 18.sp,
                         fontWeight: FontWeight.bold,

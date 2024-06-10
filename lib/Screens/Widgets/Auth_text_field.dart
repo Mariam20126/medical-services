@@ -3,8 +3,20 @@ import 'package:flutter/material.dart';
 class Auth_text_field extends StatelessWidget {
   final String text;
   final String icon;
+  bool isPassword;
+  TextEditingController controller;
+  String? Function(String?)? validator;
+  TextInputType type;
+  bool isObscure = false;
 
-  Auth_text_field({required this.text, required this.icon});
+  Auth_text_field({
+    required this.text,
+    required this.icon,
+    this.isPassword = false,
+    required this.controller,
+    required this.validator,
+    required this.type,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,8 +26,10 @@ class Auth_text_field extends StatelessWidget {
         width: MediaQuery.of(context).size.width * 0.9,
         child: TextFormField(
           textAlign: TextAlign.start,
-          obscureText: false,
-          keyboardType: TextInputType.emailAddress,
+          controller: controller,
+          validator: validator,
+          keyboardType: type,
+          obscureText: isPassword,
           textAlignVertical: TextAlignVertical.center,
           decoration: InputDecoration(
               focusColor: Colors.black26,
