@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medical/Screens/Views/Splash_screen.dart';
+import 'package:medical/ui/Views/Splash_screen.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 void main() {
