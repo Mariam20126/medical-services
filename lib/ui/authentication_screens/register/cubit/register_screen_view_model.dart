@@ -7,35 +7,39 @@ import 'package:medical/ui/authentication_screens/register/cubit/register_state.
 class RegisterScreenViewModel extends Cubit<RegisterState> {
   RegisterScreenViewModel({required this.registerUseCase})
       : super(RegisterInitialState());
-  var namelController = TextEditingController();
+  var formKey = GlobalKey<FormState>();
+  var nameController = TextEditingController();
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
   var phoneController = TextEditingController();
   var genderController = TextEditingController();
-  var formKey = GlobalKey<FormState>();
+  String dropDownValue = "one";
+
   bool isPassword = true;
-  String? valueChoosen;
-  List locationList = ['banha', 'sopra', 'minofia'];
   RegisterUseCase registerUseCase;
 
   void register() async {
     if (formKey.currentState?.validate() == true) {
       try {
         emit(RegisterLoadingState(loadingMessage: 'Loading......'));
-        var responce = await registerUseCase.invoke(
-            namelController.text,
+        var response = await registerUseCase.invoke(
+            nameController.text,
             emailController.text,
             passwordController.text,
             phoneController.text,
             genderController.text,
-            valueChoosen.toString());
-        if (responce.error?.id == '1') {
-          emit(RegisterErrorState(errorMessage: responce.message));
+            dropDownValue);
+        if (response.error?.message == 'User with this email already exists') {
+          emit(RegisterErrorState(errorMessage: response.error?.message));
         }
-        emit(RegisterSuccessState(responce: responce));
+        emit(RegisterSuccessState(response: response));
       } catch (e) {
         emit(RegisterErrorState(errorMessage: e.toString()));
       }
     }
   }
 }
+
+/*
+  String dropDownValue="one";
+ */

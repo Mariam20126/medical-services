@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:medical/data/repository/auth_repository/repository/auth_repository_implementation.dart';
 import 'package:medical/domain/use_cases/register_use_case.dart';
 import 'package:medical/ui/Widgets/Auth_text_field.dart';
 import 'package:medical/ui/Widgets/alart_dialog.dart';
@@ -32,12 +31,32 @@ class _registerState extends State<register> {
           DialogUtils.showLoading(context, state.loadingMessage!);
         } else if (state is RegisterErrorState) {
           DialogUtils.hideLoading(context);
-          DialogUtils.showMessage(context, state.errorMessage!,
-              posActionName: 'ok', title: 'error occured while registering');
+          DialogUtils.showMessage(
+            context,
+            state.errorMessage!,
+            posActionName: 'ok',
+            title: 'error occured while registering',
+            posAction: () {
+              Navigator.push(
+                  context,
+                  PageTransition(
+                      type: PageTransitionType.leftToRight, child: login()));
+            },
+          );
         } else if (state is RegisterSuccessState) {
           DialogUtils.hideLoading(context);
-          DialogUtils.showMessage(context, state.responce.user?.name ?? "",
-              posActionName: 'ok', title: 'you are successfly registered');
+          DialogUtils.showMessage(
+            context,
+            state.response.user?.name ?? "",
+            posActionName: 'ok',
+            title: 'you are successfly registered',
+            posAction: () {
+              Navigator.push(
+                  context,
+                  PageTransition(
+                      type: PageTransitionType.leftToRight, child: login()));
+            },
+          );
         }
       },
       child: Scaffold(
@@ -81,7 +100,7 @@ class _registerState extends State<register> {
                       child: Auth_text_field(
                           text: "Enter your name",
                           icon: "lib/icons/person.png",
-                          controller: viewModel.namelController,
+                          controller: viewModel.nameController,
                           validator: (text) {
                             if (text == null || text.isEmpty) {
                               return 'please enter your name';
@@ -165,35 +184,42 @@ class _registerState extends State<register> {
                     decoration: BoxDecoration(
                         border: Border.all(color: Colors.white, width: 5),
                         borderRadius: BorderRadius.circular(25)),
-                    child: DropdownButton(
-                      focusColor: Colors.white,
-                      underline: SizedBox(),
-                      hint: Text('choose your area'),
-                      dropdownColor: Colors.white,
-                      icon: Icon(
-                        Icons.arrow_drop_down,
-                        color: Colors.black,
-                        size: 30,
-                      ),
-                      isExpanded: true,
-                      iconSize: 20,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
-                      ),
-                      value: viewModel.valueChoosen,
-                      onChanged: (newValue) {
-                        setState(() {
-                          viewModel.valueChoosen = newValue as String?;
-                        });
-                      },
-                      items: viewModel.locationList.map((valueItem) {
-                        return DropdownMenuItem(
-                          value: valueItem,
-                          child: Text(valueItem),
-                        );
-                      }).toList(),
-                    ),
+                    child: DropdownButton<String>(
+                        focusColor: Colors.white,
+                        underline: SizedBox(),
+                        hint: Text('choose your geographical area'),
+                        dropdownColor: Colors.white,
+                        icon: Icon(
+                          Icons.arrow_drop_down,
+                          color: Colors.black,
+                          size: 30,
+                        ),
+                        isExpanded: true,
+                        iconSize: 20,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                        ),
+                        value: viewModel.dropDownValue,
+                        onChanged: (newValue) {
+                          setState(() {
+                            viewModel.dropDownValue = newValue!;
+                          });
+                        },
+                        items: [
+                          DropdownMenuItem<String>(
+                            value: 'one',
+                            child: Text('Benha'),
+                          ),
+                          DropdownMenuItem<String>(
+                            value: 'two',
+                            child: Text('Dokki'),
+                          ),
+                          DropdownMenuItem<String>(
+                            value: 'three',
+                            child: Text('Shoubra'),
+                          )
+                        ]),
                   ),
                 ),
                 const SizedBox(
@@ -265,3 +291,8 @@ class _registerState extends State<register> {
     );
   }
 }
+
+/*
+  setState(() {
+                Navigator.push(context, PageTransition(type: PageTransitionType.leftToRight, child: login()));});
+ */

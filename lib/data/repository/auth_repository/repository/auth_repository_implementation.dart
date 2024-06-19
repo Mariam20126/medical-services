@@ -1,4 +1,4 @@
-import 'package:medical/data/model/responce/RegisterResponce.dart';
+import 'package:medical/data/model/responce/RegisterResponse.dart';
 
 import 'package:medical/data/repository/auth_repository/data_source/auth_remote_data_source_imp.dart';
 import 'package:medical/domain/repo/data_source/auth_remote_data_source.dart';
@@ -10,10 +10,10 @@ class AuthResitoryImpl implements AuthRepositoryContract {
   AuthResitoryImpl({required this.remoteDataSource});
 
   @override
-  Future<RegisterResponce> register(String name, String email, String password,
-      String phone, String gender, String location) {
+  Future<RegisterResponse> register(String name, String email, String password,
+      String phone, String gender, String geographicalArea) {
     return remoteDataSource.register(
-        name, email, password, phone, gender, location);
+        name, email, password, phone, gender, geographicalArea);
   }
 }
 

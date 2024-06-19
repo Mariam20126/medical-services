@@ -1,6 +1,6 @@
-import 'package:medical/data/model/responce/RegisterResponce.dart';
+import 'package:medical/data/model/responce/RegisterResponse.dart';
 
 abstract class AuthRepositoryContract {
-  Future<RegisterResponce> register(String name, String email, String password,
-      String phone, String gender, String location);
+  Future<RegisterResponse> register(String name, String email, String password,
+      String phone, String gender, String geographicalArea);
 }

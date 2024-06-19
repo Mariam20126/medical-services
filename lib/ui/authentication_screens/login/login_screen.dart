@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medical/ui/Views/Homepage.dart';
 import 'package:medical/ui/Widgets/Auth_text_field.dart';
-import 'package:medical/ui/authentication_screens/forget_password_screen.dart';
+import 'package:medical/ui/authentication_screens/forget_password/forget_password_screen.dart';
 import 'package:medical/ui/authentication_screens/register/register_screen.dart';
 import 'package:medical/ui/authentication_screens/start_screen.dart';
 
