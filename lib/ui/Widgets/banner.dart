@@ -34,22 +34,6 @@ class banner extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
-              Container(
-                height: MediaQuery.of(context).size.height * 0.026,
-                width: MediaQuery.of(context).size.width * 0.2,
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 4, 138, 109),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child:
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Text(
-                    "Learn More",
-                    style: GoogleFonts.poppins(
-                        fontSize: 12.sp, color: Colors.white),
-                  ),
-                ]),
-              )
             ]),
           ),
           Container(

@@ -1,4 +1,4 @@
-import 'package:medical/data/model/responce/RegisterResponce.dart';
+import 'package:medical/data/model/responce/RegisterResponse.dart';
 
 abstract class RegisterState {}
 
@@ -17,7 +17,7 @@ class RegisterErrorState extends RegisterState {
 }
 
 class RegisterSuccessState extends RegisterState {
-  RegisterResponce responce;
+  RegisterResponse response;
 
-  RegisterSuccessState({required this.responce});
+  RegisterSuccessState({required this.response});
 }

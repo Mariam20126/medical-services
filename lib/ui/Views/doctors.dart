@@ -6,8 +6,8 @@ import 'package:medical/ui/Widgets/doctorList.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-class doctor_search extends StatelessWidget {
-  const doctor_search({super.key});
+class doctors extends StatelessWidget {
+  const doctors({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class doctor_search extends StatelessWidget {
           ),
         ),
         title: Text(
-          "Top Doctors",
+          "our Doctors",
           style: GoogleFonts.poppins(color: Colors.black, fontSize: 18.sp),
         ),
         centerTitle: true,

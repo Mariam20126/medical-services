@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:medical/ui/Views/doctor_search.dart';
+import 'package:medical/ui/Views/doctors.dart';
 import 'package:medical/ui/Widgets/banner.dart';
 import 'package:medical/ui/Widgets/list_doctor1.dart';
 import 'package:medical/ui/Widgets/listicons.dart';
@@ -16,20 +16,6 @@ class Dashboard extends StatelessWidget {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Color.fromARGB(255, 89, 138, 128),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
-            child: Container(
-              alignment: Alignment.bottomCenter,
-              height: MediaQuery.of(context).size.height * 0.06,
-              width: MediaQuery.of(context).size.width * 0.06,
-              child: Image.asset(
-                "lib/icons/bell.png",
-                filterQuality: FilterQuality.high,
-              ),
-            ),
-          ),
-        ],
         title: Column(
           children: [
             SizedBox(
@@ -97,8 +83,7 @@ class Dashboard extends StatelessWidget {
           ),
           SizedBox(
             height: 20,
-          ),
-          //Body Start fro here
+          ), //Body Start fro here
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -108,7 +93,7 @@ class Dashboard extends StatelessWidget {
                         context,
                         PageTransition(
                             type: PageTransitionType.leftToRight,
-                            child: doctor_search()));
+                            child: doctors()));
                   },
                   child:
                       listIcons(Icon: "lib/icons/Doctor.png", text: "Doctor")),
@@ -118,7 +103,7 @@ class Dashboard extends StatelessWidget {
                         context,
                         PageTransition(
                             type: PageTransitionType.leftToRight,
-                            child: doctor_search()));
+                            child: doctors()));
                   },
                   child: listIcons(
                       Icon: "lib/icons/Nurse Male.png", text: "Nurse")),
@@ -128,7 +113,7 @@ class Dashboard extends StatelessWidget {
                         context,
                         PageTransition(
                             type: PageTransitionType.leftToRight,
-                            child: doctor_search()));
+                            child: doctors()));
                   },
                   child: listIcons(
                       Icon: "lib/icons/Category.png", text: "service")),
@@ -138,20 +123,17 @@ class Dashboard extends StatelessWidget {
                         context,
                         PageTransition(
                             type: PageTransitionType.leftToRight,
-                            child: doctor_search()));
+                            child: doctors()));
                   },
                   child: listIcons(
                       Icon: "lib/icons/Syringe with a drop of blood.png",
                       text: "specialization")),
             ],
           ),
-
-          //List icons (Can Edit in Widgets )
           SizedBox(
             height: 10,
           ),
           const banner(),
-          // Banner Design
           const SizedBox(
             height: 20,
           ),
@@ -174,7 +156,7 @@ class Dashboard extends StatelessWidget {
                         context,
                         PageTransition(
                             type: PageTransitionType.rightToLeft,
-                            child: doctor_search()));
+                            child: doctors()));
                   },
                   child: Text(
                     "See all",

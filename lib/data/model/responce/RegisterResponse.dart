@@ -1,26 +1,25 @@
-import 'package:medical/data/model/responce/RegisterErrorResponce.dart';
+import 'package:medical/data/model/responce/RegisterError.dart';
 
 /// message : "User registered successfully"
-/// user : {"id":2015,"name":"IN","email":"IN@puple.com","password":"654123","phone":"01209987456","gender":"male","geographicalArea":"alex"}
+/// user : {"id":1018,"name":"ali","email":"ali@gmail.com","password":"123456789","phone":"01205574123","gender":"male","geographicalArea":"Dokki"}
 
-class RegisterResponce {
-  RegisterResponce({
+class RegisterResponse {
+  RegisterResponse({
     this.message,
     this.error,
     this.user,
   });
 
-  RegisterResponce.fromJson(dynamic json) {
+  RegisterResponse.fromJson(dynamic json) {
     message = json['message'];
     user = json['user'] != null ? User.fromJson(json['user']) : null;
-    error = json['error'] != null
-        ? RegisterErrorResponce.fromJson(json['error'])
-        : null;
+    error =
+        json['error'] != null ? RegisterError.fromJson(json['error']) : null;
   }
 
   String? message;
   User? user;
-  RegisterErrorResponce? error;
+  RegisterError? error;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -32,13 +31,13 @@ class RegisterResponce {
   }
 }
 
-/// id : 2015
-/// name : "IN"
-/// email : "IN@puple.com"
-/// password : "654123"
-/// phone : "01209987456"
+/// id : 1018
+/// name : "ali"
+/// email : "ali@gmail.com"
+/// password : "123456789"
+/// phone : "01205574123"
 /// gender : "male"
-/// geographicalArea : "alex"
+/// geographicalArea : "Dokki"
 
 class User {
   User({
@@ -60,7 +59,6 @@ class User {
     gender = json['gender'];
     geographicalArea = json['geographicalArea'];
   }
-
   int? id;
   String? name;
   String? email;
@@ -80,4 +78,5 @@ class User {
     map['geographicalArea'] = geographicalArea;
     return map;
   }
+
 }
