@@ -13,37 +13,16 @@ class Profile_screen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
-              height: 50,
-            ),
-            Center(
-              child: Stack(
-                children: [
-                  SizedBox(
-                    height: 50,
-                  ),
-                  Container(
-                    width: 110,
-                    height: 110,
-                    decoration: BoxDecoration(
-                        border: Border.all(width: 4, color: Colors.white),
-                        boxShadow: [
-                          BoxShadow(
-                              spreadRadius: 2,
-                              blurRadius: 10,
-                              color: Colors.black.withOpacity(0.1))
-                        ],
-                        shape: BoxShape.circle,
-                        image: const DecorationImage(
-                          image: AssetImage("lib/icons/male-doctor.png"),
-                          fit: BoxFit.cover,
-                        )),
-                  ),
-                ],
-              ),
-            ),
             const SizedBox(
-              height: 30,
+              height: 20,
+            ),
+            Container(
+              height: MediaQuery.of(context).size.height * 0.3,
+              width: MediaQuery.of(context).size.height * 01,
+              decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage("images/assets/logo_1.png"),
+                      filterQuality: FilterQuality.high)),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -58,10 +37,7 @@ class Profile_screen extends StatelessWidget {
               ],
             ),
             SizedBox(
-              height: 30,
-            ),
-            const SizedBox(
-              height: 50,
+              height: 10,
             ),
             Container(
               height: 550,

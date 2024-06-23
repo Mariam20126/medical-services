@@ -3,14 +3,14 @@ import 'package:medical/data/model/responce/RegisterError.dart';
 /// message : "User registered successfully"
 /// user : {"id":1018,"name":"ali","email":"ali@gmail.com","password":"123456789","phone":"01205574123","gender":"male","geographicalArea":"Dokki"}
 
-class RegisterResponse {
-  RegisterResponse({
+class RegisterResponseDto {
+  RegisterResponseDto({
     this.message,
     this.error,
     this.user,
   });
 
-  RegisterResponse.fromJson(dynamic json) {
+  RegisterResponseDto.fromJson(dynamic json) {
     message = json['message'];
     user = json['user'] != null ? User.fromJson(json['user']) : null;
     error =

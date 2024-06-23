@@ -23,6 +23,7 @@ dependencies:
   http: ^1.1.0
   flutter_bloc: ^8.1.6
   flutter_screenutil: ^5.9.0
+  provider: ^6.1.2
 
 dev_dependencies:
   flutter_test:
@@ -34,6 +35,11 @@ flutter:
   assets:
     - images/assets/
     - lib/icons/
+    - lib/icons/aha.jpg
+    - lib/icons/ana.jpg
+    - lib/icons/anan.jpg
+
+
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

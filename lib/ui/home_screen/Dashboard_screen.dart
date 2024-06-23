@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:medical/ui/Views/doctors.dart';
+import 'package:medical/ui/home_screen/tabs/Doctors_tabs_handling/doctors.dart';
 import 'package:medical/ui/Widgets/banner.dart';
 import 'package:medical/ui/Widgets/list_doctor1.dart';
 import 'package:medical/ui/Widgets/listicons.dart';
+import 'package:medical/ui/home_screen/tabs/nurse_tabs_handling/nurses_tab.dart';
+import 'package:medical/ui/home_screen/tabs/service_tab/available_service.dart';
+import 'package:medical/ui/home_screen/tabs/splization_tab/available_spsilization.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -40,47 +43,6 @@ class Dashboard extends StatelessWidget {
           SizedBox(
             height: 20,
           ),
-          Center(
-            child: Container(
-              height: MediaQuery.of(context).size.height * 0.06,
-              width: MediaQuery.of(context).size.width * 0.9,
-              decoration: BoxDecoration(),
-              child: TextField(
-                onTap: () {},
-                textAlign: TextAlign.start,
-                textInputAction: TextInputAction.none,
-                autofocus: false,
-                obscureText: false,
-                keyboardType: TextInputType.emailAddress,
-                textAlignVertical: TextAlignVertical.center,
-                decoration: InputDecoration(
-                  focusColor: Colors.black26,
-                  fillColor: Color.fromARGB(255, 247, 247, 247),
-                  filled: true,
-                  prefixIcon: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 10,
-                    ),
-                    child: Container(
-                      height: 10,
-                      width: 10,
-                      child: Image.asset(
-                        "lib/icons/search.png",
-                        filterQuality: FilterQuality.high,
-                      ),
-                    ),
-                  ),
-                  prefixIconColor: const Color.fromARGB(255, 3, 190, 150),
-                  label: Text("Search doctor name,specialization.. "),
-                  floatingLabelBehavior: FloatingLabelBehavior.never,
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-              ),
-            ),
-          ),
           SizedBox(
             height: 20,
           ), //Body Start fro here
@@ -93,7 +55,7 @@ class Dashboard extends StatelessWidget {
                         context,
                         PageTransition(
                             type: PageTransitionType.leftToRight,
-                            child: doctors()));
+                            child: Doctor()));
                   },
                   child:
                       listIcons(Icon: "lib/icons/Doctor.png", text: "Doctor")),
@@ -103,7 +65,7 @@ class Dashboard extends StatelessWidget {
                         context,
                         PageTransition(
                             type: PageTransitionType.leftToRight,
-                            child: doctors()));
+                            child: Nurse_tab()));
                   },
                   child: listIcons(
                       Icon: "lib/icons/Nurse Male.png", text: "Nurse")),
@@ -113,7 +75,7 @@ class Dashboard extends StatelessWidget {
                         context,
                         PageTransition(
                             type: PageTransitionType.leftToRight,
-                            child: doctors()));
+                            child: ServicesPage()));
                   },
                   child: listIcons(
                       Icon: "lib/icons/Category.png", text: "service")),
@@ -123,7 +85,7 @@ class Dashboard extends StatelessWidget {
                         context,
                         PageTransition(
                             type: PageTransitionType.leftToRight,
-                            child: doctors()));
+                            child: SpilizationPage()));
                   },
                   child: listIcons(
                       Icon: "lib/icons/Syringe with a drop of blood.png",
@@ -143,27 +105,11 @@ class Dashboard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Top nurse",
+                  "Top Doctors",
                   style: GoogleFonts.inter(
                     fontSize: 18.sp,
                     fontWeight: FontWeight.w700,
                     color: Color.fromARGB(255, 46, 46, 46),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pushReplacement(
-                        context,
-                        PageTransition(
-                            type: PageTransitionType.rightToLeft,
-                            child: doctors()));
-                  },
-                  child: Text(
-                    "See all",
-                    style: GoogleFonts.inter(
-                      fontSize: 16.sp,
-                      color: const Color.fromARGB(255, 3, 190, 150),
-                    ),
                   ),
                 ),
               ],
@@ -182,22 +128,69 @@ class Dashboard extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 children: [
                   list_doctor1(
-                      distance: "130m Away",
-                      image: "lib/icons/male-doctor.png",
+                      image: "lib/icons/aha.jpg",
                       maintext: "Dr. Marcus Horizon",
-                      numRating: "4.7",
+                      rate: "6.4",
                       subtext: "Chardiologist"),
                   list_doctor1(
-                      distance: "130m Away",
-                      image: "lib/icons/docto3.png",
+                      image: "lib/icons/ana.jpg",
                       maintext: "Dr. Maria Elena",
-                      numRating: "4.6",
+                      rate: "5.2",
                       subtext: "Psychologist"),
                   list_doctor1(
-                      distance: "2km away",
-                      image: "lib/icons/doctor2.png",
+                      image: "lib/icons/anan.jpg",
                       maintext: "Dr. Stevi Jessi",
-                      numRating: "4.8",
+                      rate: "5.1",
+                      subtext: "Orthopedist"),
+                ],
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Top Nurses",
+                  style: GoogleFonts.inter(
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.w700,
+                    color: Color.fromARGB(255, 46, 46, 46),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Container(
+              height: 180,
+              width: 400,
+              child: ListView(
+                physics: BouncingScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                children: [
+                  list_doctor1(
+                      image: "lib/icons/nurse 1.jpg",
+                      maintext: "Dr. Marcus Horizon",
+                      rate: "6.0",
+                      subtext: "Chardiologist"),
+                  list_doctor1(
+                      image: "lib/icons/nurse 2.jpg",
+                      maintext: "Dr. Maria Elena",
+                      rate: "5.6",
+                      subtext: "Psychologist"),
+                  list_doctor1(
+                      image: "lib/icons/nurse 3.jpg",
+                      maintext: "Dr. Stevi Jessi",
+                      rate: "5.8",
                       subtext: "Orthopedist"),
                 ],
               ),

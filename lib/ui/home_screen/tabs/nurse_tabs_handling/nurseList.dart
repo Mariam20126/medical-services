@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-class doctorList extends StatelessWidget {
+class nurseList extends StatelessWidget {
   final String image;
-  final String maintext;
-  final String subtext;
+  final String name;
+  final String splization;
   final String numRating;
-  final String distance;
+  final String location;
 
-  doctorList(
-      {required this.distance,
-      required this.image,
-      required this.maintext,
+  nurseList(
+      {required this.image,
+      required this.name,
       required this.numRating,
-      required this.subtext});
+      required this.splization,
+      required this.location});
 
   @override
   Widget build(BuildContext context) {
@@ -55,17 +55,17 @@ class doctorList extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      maintext,
+                      name,
                       style: GoogleFonts.poppins(
                         fontSize: 16.sp,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
                     Text(
-                      subtext,
+                      splization,
                       style: GoogleFonts.poppins(
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w400,
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.normal,
                           color: Colors.black54),
                     ),
                     const SizedBox(
@@ -78,21 +78,10 @@ class doctorList extends StatelessWidget {
                           width: MediaQuery.of(context).size.width * 0.08,
                           color: Color.fromARGB(255, 240, 236, 236),
                           child: Row(children: [
-                            Container(
-                              height:
-                                  MediaQuery.of(context).size.height * 0.01500,
-                              width: MediaQuery.of(context).size.width * 0.03,
-                              decoration: const BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage(
-                                        "lib/icons/star.png",
-                                      ),
-                                      filterQuality: FilterQuality.high)),
-                            ),
                             Text(
                               numRating,
                               style: GoogleFonts.poppins(
-                                  fontSize: 11.sp,
+                                  fontSize: 14.sp,
                                   color: Color.fromARGB(255, 4, 179, 120),
                                   fontWeight: FontWeight.bold),
                             ),
@@ -104,24 +93,13 @@ class doctorList extends StatelessWidget {
                       height: 5,
                     ),
                     Row(children: [
-                      Container(
-                        height: MediaQuery.of(context).size.height * 0.01500,
-                        width: MediaQuery.of(context).size.width * 0.03,
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage(
-                                "lib/icons/Location.png",
-                              ),
-                              filterQuality: FilterQuality.high),
-                        ),
-                      ),
                       const SizedBox(
-                        width: 4,
+                        width: 2,
                       ),
                       Text(
-                        distance,
+                        location,
                         style: GoogleFonts.poppins(
-                            fontSize: 11.sp,
+                            fontSize: 12.sp,
                             color: Color.fromARGB(255, 133, 133, 133),
                             fontWeight: FontWeight.bold),
                       ),
