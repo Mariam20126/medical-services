@@ -9,6 +9,7 @@ import 'package:medical/ui/authentication_screens/login/login_screen.dart';
 import 'package:medical/ui/authentication_screens/register/cubit/register_screen_view_model.dart';
 import 'package:medical/ui/authentication_screens/register/cubit/register_state.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class register extends StatefulWidget {
@@ -36,19 +37,13 @@ class _registerState extends State<register> {
             state.errorMessage!,
             posActionName: 'ok',
             title: 'error occured while registering',
-            posAction: () {
-              Navigator.push(
-                  context,
-                  PageTransition(
-                      type: PageTransitionType.leftToRight, child: login()));
-            },
           );
         } else if (state is RegisterSuccessState) {
           DialogUtils.hideLoading(context);
           DialogUtils.showMessage(
             context,
             state.response.user?.name ?? "",
-            posActionName: 'ok',
+            posActionName: 'login',
             title: 'you are successfly registered',
             posAction: () {
               Navigator.push(
@@ -208,15 +203,15 @@ class _registerState extends State<register> {
                         },
                         items: [
                           DropdownMenuItem<String>(
-                            value: 'one',
+                            value: 'Benha',
                             child: Text('Benha'),
                           ),
                           DropdownMenuItem<String>(
-                            value: 'two',
+                            value: 'Dokki',
                             child: Text('Dokki'),
                           ),
                           DropdownMenuItem<String>(
-                            value: 'three',
+                            value: 'Shoubra',
                             child: Text('Shoubra'),
                           )
                         ]),

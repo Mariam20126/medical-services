@@ -1,19 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:medical/ui/Views/appointment.dart';
-import 'package:medical/ui/Widgets/date_select.dart';
-import 'package:medical/ui/Widgets/doctorList.dart';
-import 'package:medical/ui/Widgets/time_select.dart';
-import 'package:page_transition/page_transition.dart';
+import 'package:medical/ui/home_screen/shedule_screen.dart';
+import 'package:medical/ui/Widgets/Auth_text_field.dart';
+import 'package:medical/ui/home_screen/tabs/Doctors_tabs_handling/appointment_model.dart';
+import 'package:medical/ui/home_screen/tabs/Doctors_tabs_handling/doc.dart';
+import 'package:medical/ui/home_screen/tabs/Doctors_tabs_handling/doctorList.dart';
+import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class DoctorDetails extends StatefulWidget {
+  Doctors d;
+
+  DoctorDetails({required this.d});
+
+  var dayAppointmentController = TextEditingController();
+  var timeAppointmentController = TextEditingController();
+
   @override
   _DoctorDetailsState createState() => _DoctorDetailsState();
 }
 
 class _DoctorDetailsState extends State<DoctorDetails> {
   bool showExtendedText = false;
+  bool _showAppointments = false;
 
   void toggleTextVisibility() {
     setState(() {
@@ -21,7 +30,15 @@ class _DoctorDetailsState extends State<DoctorDetails> {
     });
   }
 
+  void _toggleAppointments() {
+    setState(() {
+      _showAppointments = !_showAppointments;
+    });
+  }
+
   @override
+  var formKey = GlobalKey<FormState>();
+
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
@@ -40,7 +57,7 @@ class _DoctorDetailsState extends State<DoctorDetails> {
             ),
           ),
           title: Text(
-            "Top Doctors",
+            "",
             style: GoogleFonts.poppins(color: Colors.black, fontSize: 18.sp),
           ),
           centerTitle: true,
@@ -61,22 +78,16 @@ class _DoctorDetailsState extends State<DoctorDetails> {
           ],
           backgroundColor: Colors.white,
         ),
-        // ... Your existing code ...
-
-        body: Stack(
-          alignment: Alignment.bottomCenter,
-          children: [
+        body: SingleChildScrollView(
+          child: Stack(alignment: Alignment.bottomCenter, children: [
             Column(
               children: [
-                const SizedBox(
-                  height: 5,
-                ),
                 doctorList(
-                  distance: "800m away",
-                  image: "lib/icons/male-doctor.png",
-                  maintext: "Dr. Marcus Horizon",
-                  numRating: "4.7",
-                  subtext: "Cardiologist",
+                  image: widget.d.image,
+                  name: widget.d.name,
+                  numRating: widget.d.rate,
+                  splization: widget.d.spalization,
+                  location: widget.d.location,
                 ),
                 const SizedBox(
                   height: 15,
@@ -91,15 +102,15 @@ class _DoctorDetailsState extends State<DoctorDetails> {
                         Text(
                           "About",
                           style: GoogleFonts.poppins(
-                              fontSize: 15.sp, fontWeight: FontWeight.w500),
+                              fontSize: 18.sp, fontWeight: FontWeight.w500),
                         ),
                         const SizedBox(
                           height: 5,
                         ),
                         Text(
                           showExtendedText
-                              ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod elipss this is just a dummy text with some free lines do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam consectetur adipiscing elit. Sed euismod ..."
-                              : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod elipss this is just a dummy text with some free ... ",
+                              ? widget.d.details
+                              : widget.d.details,
                           style: GoogleFonts.poppins(
                             color: const Color.fromARGB(255, 37, 37, 37),
                             fontSize: 14.sp,
@@ -108,6 +119,7 @@ class _DoctorDetailsState extends State<DoctorDetails> {
                         const SizedBox(
                           height: 5,
                         ),
+                        /*
                         Text(
                           showExtendedText ? "Read less" : "Read more",
                           style: TextStyle(
@@ -115,8 +127,8 @@ class _DoctorDetailsState extends State<DoctorDetails> {
                                 ? Color.fromARGB(255, 1, 128, 111)
                                 : Color.fromARGB(255, 1, 128,
                                     111), // Change color based on visibility
-                          ),
-                        ),
+                          ),),
+                         */
                       ],
                     ),
                   ),
@@ -124,7 +136,161 @@ class _DoctorDetailsState extends State<DoctorDetails> {
                 SizedBox(
                   height: 20,
                 ),
-                Padding(
+                ElevatedButton(
+                  onPressed: _toggleAppointments,
+                  style: ElevatedButton.styleFrom(
+                    primary: _showAppointments
+                        ? Colors.white
+                        : Color.fromARGB(255, 89, 138, 128),
+                    onPrimary: _showAppointments
+                        ? Color.fromARGB(255, 89, 138, 128)
+                        : Colors.white,
+                  ),
+                  child: Text(_showAppointments
+                      ? "Hide Available Appointments"
+                      : "Show Available Appointments"),
+                ),
+                if (_showAppointments)
+                  Column(
+                    children: [
+                      _buildAppointmentContainer('MON :FROM 12AM TO 10BM'),
+                      _buildAppointmentContainer(' sat :FROM 10AM TO 1BM'),
+                      _buildAppointmentContainer(' wed :FROM 3AM TO 12BM'),
+                    ],
+                  ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Form(
+                  key: formKey,
+                  child: Column(
+                    children: [
+                      Auth_text_field(
+                          text: 'enter the day you choose',
+                          icon: "lib/icons/pencil.png",
+                          controller: widget.dayAppointmentController,
+                          validator: (text) {
+                            if (text == null || text.isEmpty) {
+                              return 'please enter the day of your choice';
+                            }
+                          },
+                          type: TextInputType.emailAddress),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Auth_text_field(
+                          text: 'enter the time you choose',
+                          icon: "lib/icons/watch.png",
+                          controller: widget.timeAppointmentController,
+                          validator: (text) {
+                            if (text == null || text.isEmpty) {
+                              return 'please enter time of your choice';
+                            }
+                          },
+                          type: TextInputType.datetime),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  height: 80,
+                  width: double.infinity,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 40,
+                    ),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            height: MediaQuery.of(context).size.height * 0.06,
+                            width: MediaQuery.of(context).size.width * 0.1300,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              if (formKey.currentState?.validate() == true) {
+                                final appointment = Appointment(
+                                  name: widget.d.name,
+                                  specialization: widget.d.spalization,
+                                  rate: widget.d.rate,
+                                  location: widget.d.location,
+                                  day: widget.dayAppointmentController.text,
+                                  time: widget.timeAppointmentController.text,
+                                );
+                                Provider.of<AppointmentModel>(context,
+                                        listen: false)
+                                    .addAppointment(appointment);
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            ScheduleScreen()));
+                              }
+                            },
+                            child: Container(
+                              height: MediaQuery.of(context).size.height * 0.06,
+                              width: MediaQuery.of(context).size.width * 0.6300,
+                              decoration: BoxDecoration(
+                                color: Color.fromARGB(255, 2, 179, 149),
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "Book Appointment",
+                                      style: GoogleFonts.poppins(
+                                          fontSize: 15.sp,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w500),
+                                    )
+                                  ]),
+                            ),
+                          ),
+                        ]),
+                  ),
+                ),
+              ],
+            )
+          ]),
+        ));
+  }
+
+  void _onAppointmentTap(String appointment) {
+    // Handle appointment tap
+  }
+
+  Widget _buildAppointmentContainer(String appointment) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+      padding: EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        color: Color.fromARGB(255, 89, 138, 128),
+        borderRadius: BorderRadius.circular(8.0),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black26,
+            blurRadius: 4.0,
+            offset: Offset(2, 2),
+          ),
+        ],
+      ),
+      child: Text(
+        appointment,
+        style: TextStyle(fontSize: 18.0),
+      ),
+    );
+  }
+
+  void checkValidate() {
+    if (formKey.currentState?.validate() == true) {}
+  }
+}
+
+/*
+ Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Container(
                     height: MediaQuery.of(context).size.height * 0.11,
@@ -266,7 +432,18 @@ class _DoctorDetailsState extends State<DoctorDetails> {
                     ]),
               ),
             ),
-          ],
-        ));
-  }
-}
+ */
+/*
+ Container(
+                            height: MediaQuery.of(context).size.height * 0.06,
+                            width: MediaQuery.of(context).size.width * 0.1300,
+                            decoration: BoxDecoration(
+                                color: const Color.fromARGB(255, 247, 247, 247),
+                                borderRadius: BorderRadius.circular(18),
+                                image: const DecorationImage(
+                                    image: AssetImage(
+                                      "lib/icons/Chat.png",
+                                    ),
+                                    filterQuality: FilterQuality.high)),
+                          ),
+ */

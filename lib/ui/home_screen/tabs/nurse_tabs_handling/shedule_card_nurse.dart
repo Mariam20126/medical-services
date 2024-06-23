@@ -1,31 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:medical/ui/home_screen/tabs/Doctors_tabs_handling/appointment_model.dart';
+import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-class shedule_card extends StatelessWidget {
-  final String mainText;
-  final String subText;
-
-  final String date;
+class shedule_card_Nurse extends StatelessWidget {
+  final String name;
+  final String spsialization;
+  final String day;
   final String time;
   final String confirmation;
 
-  shedule_card({
-    required this.mainText,
-    required this.subText,
-    required this.date,
+  shedule_card_Nurse({
+    required this.name,
+    required this.spsialization,
+    required this.day,
     required this.confirmation,
     required this.time,
   });
 
   @override
   Widget build(BuildContext context) {
+    final appointment = Provider.of<AppointmentModel>(context);
     return Center(
       child: Container(
         height: MediaQuery.of(context).size.height * 0.22,
         width: MediaQuery.of(context).size.width * 0.9,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Color.fromARGB(255, 89, 138, 128),
           borderRadius: BorderRadius.circular(12),
           border: Border.all(color: Colors.black12),
         ),
@@ -41,16 +43,16 @@ class shedule_card extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          mainText,
+                          'Nr/: ${name}',
                           style: GoogleFonts.poppins(
                               fontSize: 17.sp, fontWeight: FontWeight.w600),
                         ),
                         Text(
-                          subText,
+                          spsialization,
                           style: GoogleFonts.poppins(
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w600,
-                              color: const Color.fromARGB(255, 99, 99, 99)),
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ]),
                 ),
@@ -72,11 +74,11 @@ class shedule_card extends StatelessWidget {
                 ),
               ),
               Text(
-                date,
+                day,
                 style: GoogleFonts.poppins(
-                    fontSize: 12.sp,
-                    fontWeight: FontWeight.w600,
-                    color: const Color.fromARGB(255, 99, 99, 99)),
+                  fontSize: 12.sp,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
               Container(
                 height: MediaQuery.of(context).size.height * 0.03,
@@ -91,9 +93,9 @@ class shedule_card extends StatelessWidget {
               Text(
                 time,
                 style: GoogleFonts.poppins(
-                    fontSize: 12.sp,
-                    fontWeight: FontWeight.w600,
-                    color: const Color.fromARGB(255, 99, 99, 99)),
+                  fontSize: 12.sp,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
               Container(
                 height: MediaQuery.of(context).size.height * 0.03,
@@ -108,16 +110,16 @@ class shedule_card extends StatelessWidget {
               Text(
                 confirmation,
                 style: GoogleFonts.poppins(
-                    fontSize: 12.sp,
-                    fontWeight: FontWeight.w600,
-                    color: const Color.fromARGB(255, 99, 99, 99)),
+                  fontSize: 12.sp,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ]),
           ),
           Padding(
             padding: const EdgeInsets.all(15),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Container(
                   height: MediaQuery.of(context).size.height * 0.04500,
@@ -129,31 +131,20 @@ class shedule_card extends StatelessWidget {
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          "Cancel",
-                          style: GoogleFonts.poppins(
-                              fontSize: 15.sp,
-                              fontWeight: FontWeight.w600,
-                              color: Color.fromARGB(255, 61, 61, 61)),
-                        ),
-                      ]),
-                ),
-                Container(
-                  height: MediaQuery.of(context).size.height * 0.04500,
-                  width: MediaQuery.of(context).size.width * 0.3800,
-                  decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 4, 190, 144),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Reschedule",
-                          style: GoogleFonts.poppins(
-                              fontSize: 15.sp,
-                              fontWeight: FontWeight.w600,
-                              color: Color.fromARGB(255, 252, 252, 252)),
+                        GestureDetector(
+                          onTap: () {
+                            /*
+                            appointment.clearAppointment();
+                            Navigator.pop(context);
+                             */
+                          },
+                          child: Text(
+                            "Cancel",
+                            style: GoogleFonts.poppins(
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.w600,
+                                color: Color.fromARGB(255, 61, 61, 61)),
+                          ),
                         ),
                       ]),
                 ),

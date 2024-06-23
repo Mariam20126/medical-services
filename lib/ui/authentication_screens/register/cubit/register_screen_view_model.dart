@@ -13,7 +13,7 @@ class RegisterScreenViewModel extends Cubit<RegisterState> {
   var passwordController = TextEditingController();
   var phoneController = TextEditingController();
   var genderController = TextEditingController();
-  String dropDownValue = "one";
+  String dropDownValue = "Benha";
 
   bool isPassword = true;
   RegisterUseCase registerUseCase;
@@ -40,6 +40,3 @@ class RegisterScreenViewModel extends Cubit<RegisterState> {
   }
 }
 
-/*
-  String dropDownValue="one";
- */

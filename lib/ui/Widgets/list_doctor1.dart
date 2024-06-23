@@ -6,15 +6,13 @@ class list_doctor1 extends StatelessWidget {
   final String image;
   final String maintext;
   final String subtext;
-  final String numRating;
-  final String distance;
+  final String rate;
 
   list_doctor1(
-      {required this.distance,
-      required this.image,
+      {required this.image,
       required this.maintext,
-      required this.numRating,
-      required this.subtext});
+      required this.subtext,
+      required this.rate});
 
   @override
   Widget build(BuildContext context) {
@@ -63,65 +61,30 @@ class list_doctor1 extends StatelessWidget {
                   Text(
                     subtext,
                     style: GoogleFonts.poppins(
-                        fontSize: 11.sp,
-                        color: Colors.black45,
+                        fontSize: 12.sp,
+                        color: Colors.black,
                         fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(
-                    height: 15,
+                    height: 10,
                   ),
                   //Rating star container start from here!!
                   Row(
                     children: [
                       Container(
-                        height: MediaQuery.of(context).size.height * 0.01500,
-                        width: MediaQuery.of(context).size.width * 0.08,
+                        height: MediaQuery.of(context).size.height * 0.015110,
+                        width: MediaQuery.of(context).size.width * 0.09,
                         color: Color.fromARGB(255, 240, 236, 236),
                         child: Row(children: [
-                          Container(
-                            height:
-                                MediaQuery.of(context).size.height * 0.01500,
-                            width: MediaQuery.of(context).size.width * 0.03,
-                            decoration: const BoxDecoration(
-                                image: DecorationImage(
-                                    image: AssetImage(
-                                      "lib/icons/star.png",
-                                    ),
-                                    filterQuality: FilterQuality.high)),
-                          ),
                           SizedBox(
                             width: 5,
                           ),
-                          Text(
-                            numRating,
-                            style: GoogleFonts.poppins(
-                                fontSize: 11.sp,
-                                color: Color.fromARGB(255, 4, 179, 120),
-                                fontWeight: FontWeight.bold),
-                          ),
+                          Text(rate),
                         ]),
                       ),
                       //Sizebox betwen ratting + distance
                       const SizedBox(
                         width: 10,
-                      ),
-                      Container(
-                        height: MediaQuery.of(context).size.height * 0.01500,
-                        width: MediaQuery.of(context).size.width * 0.03,
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage(
-                                "lib/icons/Location.png",
-                              ),
-                              filterQuality: FilterQuality.high),
-                        ),
-                      ),
-                      Text(
-                        distance,
-                        style: GoogleFonts.poppins(
-                            fontSize: 11.sp,
-                            color: Color.fromARGB(255, 133, 133, 133),
-                            fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
